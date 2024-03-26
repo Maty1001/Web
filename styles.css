@@ -1,0 +1,62 @@
+.calculator {
+    width: 600px; /* Zvětšeno o 2x */
+    height: auto; /* Upraveno na auto, aby se výška mohla automaticky přizpůsobit obsahu */
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }     
+  
+  #display {
+    text-align: center;
+    width: 90%;
+    height: 100px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    display: inline-block;
+    color: rgb(254, 127, 15);
+    font-size: 60px; /* Zvětšeno písmo o 1.5x */
+    border: 4px solid transparent; /* 4px průhledný border pro rezervaci prostoru */
+    box-shadow: 0 0 0 4px black, /* Vnější černý border */
+                0 0 0 8px rgb(255, 138, 5); /* Vnitřní bílý border s větší mezí */
+  }
+  
+  
+  
+  
+  .keys button {
+    width: 100px; /* Zvětšeno o 2x */
+    height: 100px; /* Zvětšeno o 2x */
+    font-size: 40px; /* Zvětšeno o 2x */
+    margin: 16px; /* Zvětšeno pro zachování mezery */
+  }
+  
+  .keys button:nth-child(4n),
+  .keys button:last-child {
+    margin-right: 16px; /* Zvětšeno pro zachování mezery */
+  }
+  
+  .keys button:nth-child(4n+1) {
+    margin-left: 0px;
+  }
+  
+  /* Oranžové tlačítko "%" */
+  .keys button:nth-child(4) {
+    background-color: orange;
+    color: black;
+  }
+  
+  /* Přidáno CSS pro tlačítko Domů */
+  #homeButton {
+    position: absolute;
+    right: calc(100% + 20px); /* Zvětšeno pro větší mezeru */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 200px; /* Zvětšeno o 2x */
+    height: 160px; /* Zvětšeno o 2x */
+    font-size: 40px; /* Zvětšeno o 2x */
+  }
+  
