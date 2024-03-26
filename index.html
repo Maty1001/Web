@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cube with 6 Faces</title>
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        perspective: 1000px; /* Add perspective to create 3D effect */
+    }
+
+    .container {
+        position: relative;
+    }
+
+    .cube {
+        width: 200px;
+        height: 200px;
+        position: relative;
+        transform-style: preserve-3d;
+        /* Removed animation property */
+    }
+
+    .face {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        border: 3px solid #000000;
+    }
+
+    .front {
+        background-color: #e8e8e8; 
+        transform: translateZ(100px);
+    }
+
+    .right {
+        background-color: #001eff; 
+        transform: rotateY(90deg) translateZ(100px);
+    }
+
+    .back {
+        background-color: #f6ff00;
+        transform: rotateY(180deg) translateZ(100px);
+    }
+
+    .left {
+        background-color: #00ff22; 
+        transform: rotateY(-90deg) translateZ(100px);
+    }
+
+    .top {
+        background-color: #FFA500; 
+        transform: rotateX(90deg) translateZ(100px);
+    }
+
+    .bottom {
+        background-color: #ff0000; 
+        transform: rotateX(-90deg) translateZ(100px);
+    }
+</style>
+</head>
+<body>
+
+<div class="container" id="container">
+    <div class="cube" id="cube">
+        <div class="face front"></div>
+        <div class="face right"></div>
+        <div class="face back"></div>
+        <div class="face left"></div>
+        <div class="face top"></div>
+        <div class="face bottom"></div>
+    </div>
+</div>
+
+<script>
+    // Get the container and cube elements
+    var container = document.getElementById('container');
+    var cube = document.getElementById('cube');
+
+    // Variables to store rotation values
+    var startingX, startingY;
+    var currentX = 0;
+    var currentY = 0;
+
+    // Add mouse down event listener to document
+    document.addEventListener('mousedown', function(event) {
+        // Check if the click is inside or near the cube
+        var rect = cube.getBoundingClientRect();
+        var clickX = event.clientX;
+        var clickY = event.clientY;
+        var margin = 50; // Adjust this margin as needed
+
+        if (clickX < rect.left - margin || clickX > rect.right + margin ||
+            clickY < rect.top - margin || clickY > rect.bottom + margin) {
+            // Click is outside the cube or in its vicinity
+            // Store starting mouse coordinates
+            startingX = clickX;
+            startingY = clickY;
+
+            // Add mouse move event listener
+            document.addEventListener('mousemove', rotateCube);
+        }
+    });
+
+    // Add mouse up event listener to document
+    document.addEventListener('mouseup', function() {
+        // Remove mouse move event listener
+        document.removeEventListener('mousemove', rotateCube);
+    });
+
+    // Function to rotate the cube based on mouse movement
+    function rotateCube(event) {
+        // Calculate the change in mouse coordinates
+        var deltaX = event.clientX - startingX;
+        var deltaY = event.clientY - startingY;
+
+        // Update rotation values
+        currentY += deltaX * 0.5; // Adjust sensitivity by changing multiplier
+        currentX -= deltaY * 0.5;
+
+        // Apply rotation to cube
+        cube.style.transform = 'rotateX(' + currentX + 'deg) rotateY(' + currentY + 'deg)';
+
+        // Update starting coordinates for next movement
+        startingX = event.clientX;
+        startingY = event.clientY;
+    }
+</script>
+
+</body>
+</html>
